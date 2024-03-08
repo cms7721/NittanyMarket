@@ -1,0 +1,1 @@
+Allows user to login, see their info, change their password, view and buy products, and publish/manage their own listings if they are a seller. Made with flask in python, and html and javascript.

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title></title>
+</head>
+<body>
+    <h2>{{ prod[4] }}<br></h2>
+    <h5>{{ prod[3] }}</h4>
+    <h5>Category: {{ prod[2] }}</h4>
+    <h5>Description: {{ prod[5] }}</h5>
+    <h5 id="price">Price: {{ prod[6] }}</h5>
+    <h5>In Stock: x{{ prod[7] }}</h5>
+    <h5>Seller: {{ prod[0] }} </h5>
+    <button style="background-color: blue; color: white" onclick="redir()">Buy</button>
+    <label for="qty">Quantity:</label>
+    <input type="number" min="1" max="{{ prod[7] }}" value=1 id="qty" onchange="totalPrice()"></input>
+    <text id=total>Total Cost: {{ prod[6] }}</text>
+    <form id="browse" method="GET" action="/listings.html">
+        <button type="submit" style="background-color: brown" class="btn btn-primary">Go Back</button>
+    </form>
+    <script>
+        function totalPrice() {
+            price = parseInt(document.getElementById("price").innerHTML.substring(8))
+            document.getElementById("total").innerHTML = "Total Cost: $" + (price * document.getElementById("qty").value)
+        }
+        function redir() {
+            qty = document.getElementById("qty").value
+            window.location.href = "/confirmbuy.html?id=" + '{{ prod[1] }}' + "&qty=" + qty
+        }
+    </script>
+</body>
+</html>

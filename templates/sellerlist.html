@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title></title>
+</head>
+<body>
+    <h2>Your Product Listings</h2>
+    <button style="background-color: rgb(201, 198, 15)" class="btn btn-primary" onclick="window.location.href = '/publish.html'">Publish New Listing</button>
+    <form id="browse" method="GET" action="userinfo.html">
+        <button type="submit" style="background-color: brown" class="btn btn-primary">Go Back</button>
+    </form>
+    <div>
+        {% if lists|length == 0 %}
+        <h3 style="color: rgb(124, 15, 15)">You Have No Listings</h3>
+        {% endif %}
+
+        {% for list in lists %}
+        <div>
+            {% if list[7] == 0 or list[8] == 0 %}
+                <b style="color:gray"><br><br>{{ list[3] }}</b>
+                <small style="color:gray"><br>Description: {{ list[4] }}<br>{{ list[5] }}<br>Category: {{ list[2] }}<br>In Stock: x{{ list[7] }}<br>Price: {{ list[6] }}<br></small>
+                {% if list[8] == 0 %}
+                    <small style="color: gray">Status: Inactive<br></small>
+                {% else %}
+                    <small style="color: gray">Status: Out of Stock<br></small>
+                {% endif %}
+            {% else %}
+                <b><br><br>{{ list[3] }}</b>
+                <small><br>Description: {{ list[4] }}<br>{{ list[5] }}<br>Category: {{ list[2] }}<br>In Stock: x{{ list[7] }}<br>Price: {{ list[6] }}<br></small>
+                <small>Status: Active<br></small>
+            {% endif %}
+
+            <form onsubmit="return confirm('Are you sure you would like to re/delist this listing?')" method="POST">
+                {% if list[8] == 1 %}
+                    <input name="id" value=d{{list[1]}} readonly hidden></input>
+                    <button type="submit" style="background-color: rgb(224, 56, 14);">Remove Listing</button>
+                {% else %}
+                    <input name="id" value=a{{list[1]}} readonly hidden></input>
+                    <button type="submit" style="background-color: rgb(56, 126, 35);">Add Listing</button>
+                {% endif %}
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title></title>
+</head>
+<body>
+<div class="container-sm">
+    <div class="card-body">
+        <h1>Create a Listing</h1>
+    </div>
+    <div>
+    <form id="f" method="POST" onsubmit="alert('Published Listing Successfully'); return true;">
+        <div class="cat">
+            <label for="Categories">Category: </label>
+            <select name="Categories" id="Categories">
+                <option value ="Select a Category" selected>Select a Category</option>
+            {% for cat in Cats %}
+                <option value = "{{cat}}">{{"　"*Cats[cat][1] ~ cat}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="Title">
+            <label for="Title">Product Title:</label>
+            <input type="text" name="Title" required></input>
+        </div>
+        <div class="Name">
+            <label for="Name">Product Name:</label>
+            <input type="text" name="Name" required></input>
+        </div>
+        <div class="Description">
+            <label for="Description">Description:</label>
+            <textarea name="Description" form="f"></textarea>
+        </div>
+        <div class="Price">
+            <label for="Price">Price($):</label>
+            <input type="number" name="Price" min=0 step=.01 required></input>
+        </div>
+        <div class="Quantity">
+            <label for="qty">Quantity</label>
+            <input type="number" min=1 value=1 name="qty" required></input>
+        </div>
+        <button style="background-color: blue" class="btn btn-primary" type="submit">Publish</button>
+    </form>
+    <form id="browse" method="GET" action="sellerlist.html">
+        <button type="submit" style="background-color: brown" class="btn btn-primary">Go Back</button>
+    </form>
+    </div>
+</div>
+</body>
+</html>
